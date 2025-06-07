@@ -35,17 +35,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_rnglists 0000002c  00000000  00000000  000013f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00000af5  00000000  00000000  00001424  2**0
+ 16 .debug_macro  00000011  00000000  00000000  00001424  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   000000bb  00000000  00000000  00001f19  2**0
+ 17 .debug_line   000000bb  00000000  00000000  00001435  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00002eb9  00000000  00000000  00001fd4  2**0
+ 18 .debug_str    00002e8d  00000000  00000000  000014f0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  00004e8d  2**0
+ 19 .comment      00000043  00000000  00000000  0000437d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000005c  00000000  00000000  00004ed0  2**2
+ 20 .debug_frame  0000005c  00000000  00000000  000043c0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000051  00000000  00000000  00004f2c  2**0
+ 21 .debug_line_str 00000051  00000000  00000000  0000441c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -79,6 +79,9 @@ Disassembly of section .text:
  80001d4:	08000284 	.word	0x08000284
 
 080001d8 <main>:
+
+
+
 int main(void){
  80001d8:	b480      	push	{r7}
  80001da:	af00      	add	r7, sp, #0

@@ -55,3 +55,45 @@ void led_on(void) {
 void led_off(void) {
     GPIOA->ODR &= ~(1U << 5);  // Turn LED OFF
 }
+
+
+📡 UART Driver (USART2 TX Only)
+
+Next, I moved on to building a basic UART transmitter using USART2.
+🔍 Reference Manuals Used:
+
+    UM1724 – STM32 Nucleo-64 User Manual
+
+    RM0090 – STM32F4 Reference Manual
+
+🧠 GPIOA Pin 2 (PA2) Setup:
+
+To use PA2 for USART transmission:
+
+    Set MODER bits to alternate function mode (MODER4 = 0, MODER5 = 1)
+
+    Configure AFR[0] to select Alternate Function AF7 (USART2 TX/RX)
+
+GPIOA->MODER |= (1U<<5);
+GPIOA->MODER &=~(1U<<4);
+
+GPIOA->AFR[0] &= ~(1U<<11); // Clear bit 11
+GPIOA->AFR[0] |= (1U<<10) | (1U<<9) | (1U<<8); // Set bits 10:8 => AF7
+
+🔧 USART2 Configuration
+
+RCC->APB1ENR |= (1U << 17); // Enable clock for USART2
+
+Then set the baud rate (e.g., 115200) by configuring the BRR register:
+
+static uint32_t uart_config_baudrate(uint32_t pclk, uint32_t baud) {
+    return ((pclk + (baud / 2U)) / baud);
+}
+
+    We wrap this into uart_set_baudrate() and call it inside uart_tx_init().
+
+✅ Final USART2 TX Initialization
+
+USART2->CR1 = (1U << 3); // Enable Transmitter
+USART2->CR1 |= (1U << 13); // Enable USART
+

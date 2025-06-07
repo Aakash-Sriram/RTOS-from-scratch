@@ -29,6 +29,6 @@ void led_on(void){
 }
 void led_off(void){
 //set led pin LOW
-	GPIO->ODR&=~(1U<<5);
+	GPIOA->ODR&=~(1U<<5);
 }
 

@@ -1,7 +1,8 @@
 #include"uart.h"
-
-#define GPIOAEN        (1U<<0)
-
+static void  uart_config_baudrate(uint32_t peripheral_clock,uint32_t baud);
+static void  uart_set_baudrate(uint32_t peripheral_clock,uint32_t baud);
+#define GPIOAEN  (1U<<0)
+#define UAR2EN    (1U<<17)
 void uart_tx_init(void){
 	//USART - universal synchronus asycnronus reciever transmitter but only async is only mostly used
 	//so hence UART
@@ -30,5 +31,13 @@ void uart_tx_init(void){
 	 * configure transfer direction
 	 *Enable the module
 	 */
-}
 
+	RCC->APB1ENR |= UAR2EN;
+}
+static void  uart_set_baudrate(uint32_t peripheral_clock,uint32_t baud){
+	USART2_>BRR = uart_config_baudrate(peripheral_clock,baud);
+}
+static void  uart_config_baudrate(uint32_t peripheral_clock,uint32_t baud){
+	(peripheral_clock + ( (baud/2U) )/baud);
+
+}

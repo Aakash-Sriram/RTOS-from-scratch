@@ -1,14 +1,20 @@
 #include"uart.h"
 static uint32_t uart_config_baudrate(uint32_t peripheral_clock, uint32_t baud);
 static void  uart_set_baudrate(uint32_t peripheral_clock,uint32_t baud);
+static void uart_write(int ch);
 //default 16 megahertz for peripheral clock
 #define SYS_FREQ 16
 #define APB1_CLOCK  SYS_FREQ
 #define UART_BAUDRATE  115200
 #define GPIOAEN  (1U<<0)
+#define SR_TXE (1U<<7)
 #define UAR2EN    (1U<<17)
 #define CR1_TE  (1U<<3)
 #define CR1_UE (1U<<3)
+int __io_putchar(int ch){
+	uart_write(ch);
+	return ch;
+}
 void uart_tx_init(void){
 	//USART - universal synchronus asycnronus reciever transmitter but only async is only mostly used
 	//so hence UART
@@ -43,6 +49,18 @@ void uart_tx_init(void){
 
 	USART2->CR1 = CR1_TE;//transmitter enable and set everything else to zero
 	USART2->CR1 |=  CR1_UE;//enable USART
+
+}
+
+
+
+static void uart_write(int ch){
+	/*
+	 * make sure transmit data reg is empty
+	 * write  transmit data registeer
+	 * */
+	while( (USART2->SR & SR_TXE) ){}
+	USART2->DR = (ch&0XFF);
 
 }
 static uint32_t uart_config_baudrate(uint32_t peripheral_clock, uint32_t baud) {

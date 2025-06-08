@@ -97,3 +97,38 @@ static uint32_t uart_config_baudrate(uint32_t pclk, uint32_t baud) {
 USART2->CR1 = (1U << 3); // Enable Transmitter
 USART2->CR1 |= (1U << 13); // Enable USART
 
+🔨 Implementing uart_write()
+
+To actually transmit characters, we implemented a basic UART transmit function:
+
+static void uart_write(int ch) {
+    while (!(USART2->SR & (1U << 7))); // Wait until TXE (Transmit Data Register Empty)
+    USART2->DR = (ch & 0xFF);          // Write data to the data register
+}
+
+🧠 Explanation:
+
+    USART2->SR & (1U << 7) checks the TXE flag — it tells us when the UART is ready to accept new data for transmission.
+
+    The loop ensures we don’t overwrite previous data.
+
+    The data is masked with 0xFF to ensure only 8 bits are written (one byte at a time).
+
+📤 Redirecting printf() — __io_putchar()
+
+To seamlessly use printf() for debugging:
+
+int __io_putchar(int ch) {
+    uart_write(ch);
+    return ch;
+}
+
+This links printf() to our uart_write() under the hood. Most STM32 toolchains call __io_putchar() when printf() is used — this makes debugging much easier, especially when writing a custom RTOS.
+
+🧪 Testing the TX Line
+
+With everything set up, you can now do:
+
+printf("Hello from RTOS!\r\n");
+
+...and see the message on your serial terminal (like PuTTY or minicom), confirming UART TX is alive 

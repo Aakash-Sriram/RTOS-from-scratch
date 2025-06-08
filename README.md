@@ -132,3 +132,38 @@ With everything set up, you can now do:
 printf("Hello from RTOS!\r\n");
 
 ...and see the message on your serial terminal (like PuTTY or minicom), confirming UART TX is alive 
+
+
+
+
+⏱️ Timebase (SysTick Timer Interrupts)
+
+To bring timing capabilities to our RTOS, I added a timebase using the SysTick Timer, which generates 1-second periodic interrupts using the system clock.
+
+📚 Reference Used:
+
+    ARM Cortex-M4 Devices Generic User Guide – SysTick Timer (Section 4.4)
+
+    STM32F4 Reference Manual (RM0090)
+
+🧠 Why Use SysTick?
+
+SysTick is a built-in 24-bit down counter that's part of every Cortex-M core. It's ideal for periodic interrupts, like ticking the RTOS scheduler (think round-robin or time slicing).
+
+🔍 Register Breakdown:
+
+    LOAD: Reload value for 1s delay (16 million for 16 MHz)
+
+    VAL: Clears the current counter to start fresh
+
+    CTRL: Sets clock source, enables interrupt, and starts the timer
+
+🧨 Key Flags:
+
+    TICKINT: Enables the SysTick interrupt.
+
+    ENABLE: Starts the counter.
+
+    CLKSOURCE: Chooses processor clock (AHB) over external clock.
+
+    COUNTFLAG: Can be polled to detect underflow (optional use).[It's automatically set to 1 by hardware whenever the timer counts down to 0]

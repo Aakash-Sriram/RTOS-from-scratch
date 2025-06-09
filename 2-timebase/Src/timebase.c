@@ -4,7 +4,19 @@
 #define SysCTRL_TICKINT (1U<<1)
 #define SysCTRL_CLCK_SOURCE (1U<<2)
 #define SysCTRL_COUNTFLAG (1U<<16)
-void timebase_int(void){
+
+volatile uint8_t timer_variable =0;
+
+
+void SysTick_Handler(void){
+	timer_variable++;
+
+}
+void timebase_stop(void){
+	SysTick->CTRL &=~SysCTRL_ENABLE;
+}
+
+void timebase_init(void){
 	/*
 	 * reload timer with number of cycle per s
 	*/
@@ -23,5 +35,12 @@ void timebase_int(void){
 	SysTick->CTRL |= SysCTRL_ENABLE;
 	/* enable global interupt
 	 */
+
 	__enable_irq();
+}
+
+
+void func(void){
+
+
 }

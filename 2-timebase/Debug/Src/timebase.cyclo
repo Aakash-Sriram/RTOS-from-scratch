@@ -1,1 +1,4 @@
-../Src/timebase.c:7:6:timebase_int	1
+../Src/timebase.c:11:6:SysTick_Handler	1
+../Src/timebase.c:15:6:timebase_stop	1
+../Src/timebase.c:19:6:timebase_init	1
+../Src/timebase.c:43:6:func	1

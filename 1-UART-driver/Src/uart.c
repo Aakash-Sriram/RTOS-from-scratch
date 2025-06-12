@@ -11,8 +11,17 @@ static void uart_write(int ch);
 #define UAR2EN    (1U<<17)
 #define CR1_TE  (1U<<3)
 #define CR1_UE (1U<<3)
+#define USART_DATAREG_EMPTY (1U<<5)
+#define UART_RECIEVER_ENABLE (1U<<2)
+#define UART_RECIEVER_WAKE (1U<<1)
+#define UART_
+
 int __io_putchar(int ch){
 	uart_write(ch);
+	return ch;
+}
+int __io_getchar(void){
+	int ch = uart_read();
 	return ch;
 }
 void uart_tx_init(void){
@@ -52,7 +61,13 @@ void uart_tx_init(void){
 
 }
 
+static void uart_recieve(int ch){
+	USART2->CR1 |= UART_RECIEVER_WAKE;
+	USART2->CR1 |= UART_RECIEVER_ENABLE;
+	while( !(USART2->RXNE & UART_REG_EMPTY) ){}
+	int data = USART2->DR;
 
+}
 
 static void uart_write(int ch){
 	/*

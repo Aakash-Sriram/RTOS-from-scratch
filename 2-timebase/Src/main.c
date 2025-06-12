@@ -1,14 +1,15 @@
 #include "timebase.h"
-#include<stdio.h>
+#include "uart.h"
+#include "led.h"
 
 int main(void){
-
-	printf("%d\n",timer_variable);
+	led_init();
+	uart_tx_init();
 	timebase_init();
-	int l = 10;
-	while(l>0){
-		printf("%d\n",timer_variable);
-		l--;
+	while(1){
+		delay(5);
+		printf("this is printing every 5 seconds\n\r");
 	}
+	return 0;
 }
 

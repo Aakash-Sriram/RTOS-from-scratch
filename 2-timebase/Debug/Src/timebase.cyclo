@@ -1,4 +1,6 @@
-../Src/timebase.c:11:6:SysTick_Handler	1
-../Src/timebase.c:15:6:timebase_stop	1
-../Src/timebase.c:19:6:timebase_init	1
-../Src/timebase.c:43:6:func	1
+../Src/timebase.c:12:6:increment	1
+../Src/timebase.c:15:9:getTick	1
+../Src/timebase.c:21:6:delay	2
+../Src/timebase.c:29:6:SysTick_Handler	1
+../Src/timebase.c:32:6:timebase_stop	1
+../Src/timebase.c:36:6:timebase_init	1

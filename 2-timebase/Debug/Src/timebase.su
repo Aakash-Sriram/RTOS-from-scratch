@@ -1,4 +1,6 @@
-../Src/timebase.c:11:6:SysTick_Handler	4	static
-../Src/timebase.c:15:6:timebase_stop	4	static
-../Src/timebase.c:19:6:timebase_init	4	static,ignoring_inline_asm
-../Src/timebase.c:43:6:func	4	static
+../Src/timebase.c:12:6:increment	4	static
+../Src/timebase.c:15:9:getTick	4	static,ignoring_inline_asm
+../Src/timebase.c:21:6:delay	24	static
+../Src/timebase.c:29:6:SysTick_Handler	8	static
+../Src/timebase.c:32:6:timebase_stop	4	static
+../Src/timebase.c:36:6:timebase_init	4	static,ignoring_inline_asm

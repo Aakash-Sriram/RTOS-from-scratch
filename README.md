@@ -171,3 +171,20 @@ Added a basic SysTick timebase to generate a tick interrupt every 1 second.
     timebase_stop() disables the SysTick timer by clearing the enable bit.
 
     This simple driver can be used as a basic timer tick for scheduling or other timing operations in the RTOS.
+
+
+
+
+
+
+### 1-UART-driver
+  Renode simulation for the driver has been simulated and verified 
+  refer RENODE docs for Installation
+  ## For setup in RENODE  
+    mach create 
+    machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl 
+    (its a preconfigured stm32f4 discovery board available in renod)
+    sysbus LoadELF @/path_to_the_elf_file/1-UART-driver.elf
+    showAnalyzer sysbus.usart2
+    start
+![alt text](image.png)

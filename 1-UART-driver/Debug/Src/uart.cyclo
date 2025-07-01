@@ -1,5 +1,7 @@
-../Src/uart.c:14:5:__io_putchar	1
-../Src/uart.c:18:6:uart_tx_init	1
-../Src/uart.c:57:13:uart_write	2
-../Src/uart.c:66:17:uart_config_baudrate	1
-../Src/uart.c:70:13:uart_set_baudrate	1
+../Src/uart.c:20:5:__io_putchar	1
+../Src/uart.c:24:5:__io_getchar	1
+../Src/uart.c:28:12:uart_read	2
+../Src/uart.c:32:6:uart_tx_init	1
+../Src/uart.c:78:13:uart_write	2
+../Src/uart.c:87:17:uart_config_baudrate	1
+../Src/uart.c:91:13:uart_set_baudrate	1
